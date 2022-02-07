@@ -7,15 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="app"></div>
-    <script>
+    <div id="app">
+    
+    </div>
+    <script> //태그나 돔의 내용을 조절
         var div = document.querySelector("#app"); //div에 app에 해당하는 내용을 변수로 받아옴.
-        console.log(div);
+        console.log(div); //div의 내용을 출력
+
         var str = 'Hello World!!!';
-        div.innerHTML=str;
+        div.innerHTML=str; //html코드를 적용시킴
 
         str = 'Hello World';
-        div.innerHTML=str;
+        div.innerHTML=str; //다시 값을 갱신해줘야 함.
     </script>
 </body>
 </html>
