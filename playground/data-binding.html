@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p v-bind:id="uuid" v-bind:class="name">{{ num }}</p>
+        <!-- <p id="abc1234">{{ num }}</p> -->
+        <!-- computed 속성 -->
+        <p>{{ doublenum }}</p>  
+        <div v-if="loading"> <!--else일때 아에 지움-->
+            Loading...
+        </div>
+        <div v-else>
+            test user has been logged in
+        </div>
+        <div v-show="loading"> <!--dom 의 정보는 남아있지만, 브라우저에서만 표시를 안하는 것-->
+            Loading...
+        </div>
+        <!--TODO: 인풋 박스를 만들고 입력된 값을 p태그에 출력-->
+        <input type="text" v-model="message">
+        <p>{{ message }}</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // var input = document.querySelector('input');
+        // var input = $('input');
+        new Vue({
+            el:'#app',
+            data:{
+                num : 10,
+                uuid:'abc1234', //v-bind로 id에 uuid로 연결하겠다. 전체적인 도메인의 reactivity까지 관리할 수 있다.
+                name:'text-blue',
+                loading:true,
+                message:""
+            }, // 값이 오브젝트 디파인으로 연결되는 것 : 데이터 바인딩
+            computed:{
+                doublenum:function(){
+                    return this.num * 2;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

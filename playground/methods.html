@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="logText">click me</button> 
+        <!-- 버튼을 클릭했을 때(이벤트 타입) 실행한 메서드를 인스턴스의 methods속성에 정의 -->
+        <input type="text" v-on:keyup.enter="logText">
+        <!-- v-on: 키보드나 마우스가 올라왔을 때 반응하는 뷰 디렉티브 / 이벤트 모디파이어 : 이벤트.특정키 -->
+        <button>add</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        new Vue({
+            el:'#app',
+            methods:{
+                logText:function(){
+                    console.log('click me')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

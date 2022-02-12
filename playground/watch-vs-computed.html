@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{ num }}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                num:10
+            },
+            computed:{ // 값의 계산, 뷰 validation값을 계산 [왠만하면 computed로 하자.]
+                doubleNum:function(){ //함수의 결과값이 doubleNum으로 전달
+                    return this.num*2;
+                }
+            },
+            watch:{ //매번 실행되는 게 부담스러운, 무거운 로직
+                num:function(newValue,oldValue){
+                    this.fetchUserByNumber(newValue);
+                }
+            },
+            methods:{
+                fetchUserByNumber:function(num){
+                    // console.log(num);
+                    axois.get(num); //데이터 요청과 같은 무거운 요청.
+                }
+            }
+        })
+    </script>
+</body>
+</html>

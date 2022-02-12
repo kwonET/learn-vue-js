@@ -7,17 +7,49 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <p>{{ num }}</p>
+        <!-- <app-header v-on : 하위 컴포넌트에서 발생한 이벤트 이름 = "상위 컴포넌트의 메서드 이름"></app-header> -->
+        <app-header v-on:pass="logText"></app-header>
+        <app-content v-on:add="addNum"></app-content>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     
     <script>
-        var appHeader={}
-        new Vue({
+        var appHeader={
+            template:'<button v-on:click="passEvent">click me</button>', //click했을 때의 이벤트들이 기록됨.
+            methods:{
+                passEvent: function() { //api이자 기능.
+                    this.$emit('pass'); //pass라는 이벤트가 emit된다.
+                }
+            }
+        }
+        var appContent={
+            template:'<button v-on:click="addNumber">add</button>', //v-on:뷰에서 제공하는 속성 버튼 클릭 시 addNumber을 실행한다
+            methods:{
+                addNumber: function(){ //메서드 함수
+                    this.$emit('add');
+                }   
+            }
+        }
+
+        var vm=new Vue({
             el:'#app',
             components:{ //로컬 컴포넌트 등록 방식.
-                'app-Header':appHeader
-
+                'app-header':appHeader,
+                'app-content':appContent
+            },
+            methods:{
+                logText:function(){
+                    console.log('hi');
+                },
+                addNum:function(){
+                    this.num+=1; //data의 num 속성을 가리킨다.
+                }
+            },
+            data:{
+                num:10
             }
         })
     </script>

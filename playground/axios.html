@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- getData로 메서드를 호출한다. -->
+        <button v-on:click="getData">get user</button> 
+        <div>
+            {{  users  }}
+        </div>
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+     <!-- axios 가져옴 --> 
+  <script>
+      new Vue({
+          el:'#app',
+          data:{
+            users:[]  
+          },
+          methods:{
+              //10개의 사용자 정보가 담긴 곳. 자바스크립트 샘플 데이터.
+            getData:function(){
+                // 호출 전 this: 인스턴스나 컴포넌트를 바라봄. this가 다르기 때문에 변수에 넣어줌으로써 처리해줘야한다.
+                var vm=this; //보통 인스턴스를 가르키는 변수 vm
+                axios.get('https://jsonplaceholder.typicode.com/users/')
+                .then(function(response){
+                    // 호출 후 this : 비동기처리 후 실행 처리가 바뀌면서 this 내용도 바뀜.
+                    vm.users=response.data; //response 중에서 원하는 데이터를 받음.
+                })
+                .catch(function(error){
+                    console.log(error);
+                });
+            }
+          }
+      })
+  </script>
+</body>
+</html>
